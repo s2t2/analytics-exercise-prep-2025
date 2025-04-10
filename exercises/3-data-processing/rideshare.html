@@ -119,14 +119,14 @@
         console.log("PART 2...")
 
         // A) Display the driver's first name
-        document.getElementById("display-driver").textContent = trip.driver.first_name;
+        document.getElementById("display-driver").textContent = trip.driver.first_name
 
         // B) Display the vehicle's make, model, and license plate number
         var vehicle = trip.vehicle
-        document.getElementById("display-vehicle").textContent = `${vehicle.make} ${vehicle.model}, ${vehicle.licensePlate}`;
+        document.getElementById("display-vehicle").textContent = `${vehicle.make} ${vehicle.model}, ${vehicle.licensePlate}`
 
         // C) Loop through each of the stops and display each passenger's name in a list item
-        var ol = document.getElementById("display-passengers");
+        var ol = document.getElementById("display-passengers")
         trip.stops.forEach(stop => {
             var li = document.createElement("li")
             li.textContent = stop.passenger
