@@ -3,22 +3,60 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Rideshare Data Challenge</title>
+    <title>Rideshare Challenge</title>
 </head>
 <body>
 
-    <h1>Rideshare Data Challenge</h1>
+    <h1>Rideshare Challenge</h1>
 
-    <p>Check out the JavaScript console for some data crunching action...</p>
+    <h2>Part 1</h2>
+    <p>
+        Write JavaScript code to process the provided <code>rideshare</code> variable to answer the questions below.
+        Log each of the answers to the console.
+
+        <ol type="A">
+            <li>Display a human-friendly message to denote the driver's first name (i.e. "Your driver is Danny").</li>
+            <li>Display the license plate number (i.e. "ABC-1234").</li>
+            <li>Display the number of stops this trip makes (i.e. 3).</li>
+            <li>Display the destination of the first stop (i.e. "Logan Circle").</li>
+            <li>Display the destination of the last stop (i.e. "Washington Circle"). <strong>NOTE:</strong> your solution should work regardless of how many stops there are (i.e. should reference the last item dynamically, not assume the third stop is necessarily the last).</li>
+            <li>Loop through each of the stops and display that stop's passenger name, one at a time (i.e. "Vishal", then "Clara", then "Lee", each on a separate line).</li>
+            <li>Use a mapping operation to arrive at an array of just the numeric fare values, store them in a variable called <code>fares</code>, and display them. </li>
+            <li>Calculate and display the total fare for the entire trip, which is equal to the sum of all the fares for all passengers.
+                Format the total fare as USD, with a dollar sign and rounded to two decimal places.
+                <strong>HINT:</strong> use an accumulator approach in conjunction with Question G, or use the <code>d3.sum()</code> function from the <code>d3-array</code> library.
+            </li>
+        </ol>
+    </p>
+
+    <hr>
+    <h2>Part 2</h2>
+    <p>
+        Write JavaScript code to process the provided <code>rideshare</code> variable to answer the questions below.
+        Display the answers on the page in the designated places.
+        <ol type="A">
+            <li>Display the driver's first name. Use the designated <code>span</code> element.</li>
+            <li>Display the vehicle's make, model, and license plate number. Use the designated <code>span</code> element.</li>
+            <li>Loop through each of the stops and display that stop's passenger name, one at a time (i.e. "Vishal", then "Clara", then "Lee", each in a separate list item).
+                Use the designated <code>ol</code> element.</li>
+            </li>
+        </ol>
+    </p>
+
 
     <div id="rideshare-app">
+
+        <p>Driver: <span id="display-driver">TODO</span></p>
+
+        <p>Vehicle: <span id="display-vehicle">TODO</span></p>
+
+        <p>Passengers:</p>
+        <ol id="display-passengers">
+        </ol>
     </div>
 
+    <script src="https://cdn.jsdelivr.net/npm/d3-array@3"></script>
     <script type="text/javascript">
-
-        //
-        // SETUP SECTION (leave this as-is)
-        //
 
         var trip = {
             "driver": {
@@ -28,52 +66,72 @@
                 "total_rides": 950
             },
             "vehicle": {
-                "make": "Tesla",
-                "model": "Cybertruck",
+                "make": "Toyota",
+                "model": "Prius",
                 "year": 2021,
-                "color": "silver"
+                "color": "silver",
+                "licensePlate": "ABC-1234"
             },
             "rideshare": true,
-            "pickup_location": "Grand Central Terminal",
+            "pickup_location": "Union Station",
             "stops": [
-                {"sequence": 1, "passenger": "Vishal", "destination": "Madison Square", "fare": 3.99},
-                {"sequence": 2, "passenger": "Clara", "destination": "Union Square", "fare": 5.99},
-                {"sequence": 3, "passenger": "Lee", "destination": "Washington Square", "fare": 7.99}
+                {"sequence": 1, "passenger": "Vishal", "destination": "Logan Circle", "fare": 5.99},
+                {"sequence": 2, "passenger": "Clara", "destination": "Dupont Circle", "fare": 7.99},
+                {"sequence": 3, "passenger": "Lee", "destination": "Washington Circle", "fare": 9.99}
             ]
-        } // leave this variable as-is
+        }
 
+        console.log("---------------------")
+        console.log("PART 1...")
 
-        //
-        // IMPLEMENTATION SECTION (write your own JavaScript below)
-        //
-
-        console.log("TRIP", trip)
-
-        // A) Print a human-friendly message to denote the driver’s first name (i.e. "Your driver is Danny"):
-
+        // A
         console.log("DRIVER:", trip.driver.first_name)
 
-        // B) Assuming stops can get added or removed at any time, print the number of stops this trip makes (i.e. 3):
+        // B
+        console.log("VEHICLE PLATE:", trip.vehicle.licensePlate)
 
+        // C)
         console.log("STOPS:", trip.stops.length)
 
-        // C) Print the destination of the FIRST stop (i.e. Madison Square"):
+        // D)
+        console.log("FIRST STOP:", trip.stops[0])
 
-        console.log("... FIRST:", trip.stops[0])
+        // E)
+        console.log("LAST STOP:", trip.stops[trip.stops.length - 1])
 
-        // D) Print the destination of the LAST stop (i.e. "Washington Square"):
-
-        console.log("... LAST:", trip.stops[trip.stops.length - 1])
-
-        // E) Loop through each of the trip’s stops and print that stop’s passenger name, one at a time (i.e. "Vishal", then "Clara", then "Lee", each on a separate line):
-
-        console.log("... ALL:")
-
+        // F)
         trip.stops.forEach(function(stop){
-            console.log(stop.destination)
+            console.log(stop.passenger, stop.destination)
         })
 
+        // G)
+        var fares = trip.stops.map(function(stop){
+            return stop.fare
+        })
 
+        // H
+        var totalFare = d3.sum(fares)
+        console.log("TOTAL FARE:", `$${totalFare.toFixed(2)}`)
+
+
+
+        console.log("---------------------")
+        console.log("PART 2...")
+
+        // A) Display the driver's first name
+        document.getElementById("display-driver").textContent = trip.driver.first_name;
+
+        // B) Display the vehicle's make, model, and license plate number
+        var vehicle = trip.vehicle
+        document.getElementById("display-vehicle").textContent = `${vehicle.make} ${vehicle.model}, ${vehicle.licensePlate}`;
+
+        // C) Loop through each of the stops and display each passenger's name in a list item
+        var ol = document.getElementById("display-passengers");
+        trip.stops.forEach(stop => {
+            var li = document.createElement("li")
+            li.textContent = stop.passenger
+            ol.appendChild(li)
+        })
 
     </script>
 
