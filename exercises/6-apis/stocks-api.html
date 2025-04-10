@@ -2,11 +2,11 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <title>Products CSV Challenge</title>
+    <title>Stocks CSV Challenge</title>
 </head>
 <body>
 
-    <h1>Products CSV Challenge</h1>
+    <h1>Stocks CSV Challenge</h1>
 
     <h2>Part 1</h2>
     <p>
@@ -37,20 +37,33 @@
     </p>
 
 
+
+
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
     <script type="text/javascript">
 
-        //import * as d3 from "https://cdn.jsdelivr.net/npm/d3@7/+esm"
+        function getApiKey() {
+            // Check for "ALPHAVANTAGE_API_KEY" in session storage:
+            var apiKey = sessionStorage.getItem("ALPHAVANTAGE_API_KEY")
+            //console.log("STORED KEY", storedKey)
+            return apiKey
+        }
+        //var symbol = prompt("Please enter a stock symbol  (one of: [AAPL, GOOGL, MSFT, NFLX, NVDA, SPOT])")
+        //if (symbol !== null) {
+        //    console.log("SYMBOL:", symbol);
+        //}
 
-        // products.csv file
-        var requestUrl = "https://raw.githubusercontent.com/prof-rossetti/intro-to-python/main/data/products.csv"
+        const API_KEY = ""
+        var symbol = "NFLX" // one of: [AAPL, GOOGL, MSFT, NFLX, NVDA, SPOT]
+        var filename = `daily_adjusted_${symbol}.csv`
+        var requestUrl = `https://raw.githubusercontent.com/prof-rossetti/intro-software-dev-python-book/refs/heads/main/docs/data/${filename}`
 
         d3.csv(requestUrl).then(function(data) {
             console.log("DATA:", data)
-            var products = data
 
             console.log("---------------------")
             console.log("PART 1...")
+
 
 
 
