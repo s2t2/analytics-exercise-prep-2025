@@ -10,10 +10,12 @@
 
     <h2>Part 1</h2>
     <p>
-        Create a JavaScript function called <code>calculateAreaOfCircle</code>
+        Create a JavaScript function called <code>calculateCircleArea</code>
         that takes an input parameter called <code>radius</code>,
         and returns the corresponding area.
-        Invoke the function with a radius of 9 and store the resulting area in a variable.
+    </p>
+    <p>
+        Invoke the function, passing a radius of 9, and store the resulting area in a variable.
         Log both the radius and the corresponding area to the console.
     </p>
 
@@ -50,18 +52,19 @@
         console.log("---------------------")
         console.log("PART 1...")
 
-        function calculateAreaOfCircle(radius){
+        function calculateCircleArea(radius){
             return Math.PI * radius
         }
 
         var radius = 9
         console.log("RADIUS:", radius)
-        var area = calculateAreaOfCircle(radius)
+        var area = calculateCircleArea(radius)
         console.log("AREA:", area)
 
 
+
         console.log("---------------------")
-        console.log("PART 3...")
+        console.log("PART 2...")
 
         var inputRadius = document.getElementById("input-radius")
         var calcButton = document.getElementById("calculate")
@@ -69,7 +72,7 @@
 
         function submitForm(params) {
             var radius = inputRadius.value
-            var area = calculateAreaOfCircle(radius)
+            var area = calculateCircleArea(radius)
 
             displayArea.innerHTML = area
         }
