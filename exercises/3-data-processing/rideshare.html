@@ -25,7 +25,9 @@
             <li>Use a mapping operation to arrive at an array of just the numeric fare values, store them in a variable called <code>fares</code>, and display them. </li>
             <li>Calculate and display the total fare for the entire trip, which is equal to the sum of all the fares for all passengers.
                 Format the total fare as USD, with a dollar sign and rounded to two decimal places.
-                <strong>HINT:</strong> use an accumulator approach in conjunction with Question G, or use the <code>d3.sum()</code> function from the <code>d3-array</code> library.
+                <strong>HINT:</strong> use an accumulator approach in conjunction with Question G,
+                    or use the <a href="https://d3js.org/d3-array/summarize#sum"><code>d3.sum()</code> function</a>
+                    from the <code>d3-array</code> library.
             </li>
         </ol>
     </p>
@@ -86,7 +88,7 @@
         console.log("PART 1...")
 
         // A
-        console.log("DRIVER:", trip.driver.first_name)
+        console.log("DRIVER:", "Your driver is", trip.driver.first_name)
 
         // B
         console.log("VEHICLE PLATE:", trip.vehicle.licensePlate)
@@ -95,20 +97,22 @@
         console.log("STOPS:", trip.stops.length)
 
         // D)
-        console.log("FIRST STOP:", trip.stops[0])
+        console.log("FIRST STOP:", trip.stops[0].destination)
 
         // E)
-        console.log("LAST STOP:", trip.stops[trip.stops.length - 1])
+        console.log("LAST STOP:", trip.stops[trip.stops.length - 1].destination)
 
         // F)
+        console.log("PASSENGERS:")
         trip.stops.forEach(function(stop){
-            console.log(stop.passenger, stop.destination)
+            console.log("...", stop.passenger)
         })
 
         // G)
         var fares = trip.stops.map(function(stop){
             return stop.fare
         })
+        console.log("FARES:", fares)
 
         // H
         var totalFare = d3.sum(fares)
@@ -124,7 +128,7 @@
 
         // B) Display the vehicle's make, model, and license plate number
         var vehicle = trip.vehicle
-        document.getElementById("display-vehicle").textContent = `${vehicle.make} ${vehicle.model}, ${vehicle.licensePlate}`
+        document.getElementById("display-vehicle").textContent = `${vehicle.make} ${vehicle.model} [${vehicle.licensePlate}]`
 
         // C) Loop through each of the stops and display each passenger's name in a list item
         var ol = document.getElementById("display-passengers")
