@@ -35,6 +35,8 @@
 
         <strong>HINT:</strong> see the <a href="https://d3js.org/d3-random#randomNormal"><code>d3.randomNormal()</code> function</a> provided by the <code>d3-random</code> library.
     </p>
+    <p>In addition to logging the original balance, the number of years, and the actual ending balance to the console, the program should also log the specific random return rates used each year.
+</p>
 
     <hr>
     <h2>Part 3</h2>
@@ -83,7 +85,7 @@
 
         while(balance < 1000000){
             var rate = rateGenerator()
-            console.log(rate)
+            console.log(years, rate)
             balance = balance * ( 1+ rate) // ACCUMULATE THE BALANCE
             years = years + 1
         }
