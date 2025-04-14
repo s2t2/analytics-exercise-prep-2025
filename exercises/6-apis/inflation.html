@@ -33,21 +33,10 @@
             <li>Display the time frequency of this dataset (i.e. "annual").</li>
             <li>Display the number of datapoints provided. (i.e. 64).</li>
             <li>Display the time range (earliest and latest date) of available data (i.e. "1960-01-01" to "2023-01-01".</li>
+            <li>Display the average, median, min, and max inflation rate (using all available data).</li>
+            <li>Display the average, median, min, and max inflation rate (over the past ten years only).</li>
         </ol>
     </p>
-
-
-
-
-
-D) Create a line chart of the inflation rate over time. Include a chart title and axis labels.
-
-E) What is the average, median, min, and max inflation rate (using all available data)?
-
-F) What is the average, median, min, and max inflation rate (over the past ten years only)?
-
-
-
 
 
 
@@ -58,11 +47,11 @@ F) What is the average, median, min, and max inflation rate (over the past ten y
         Display the answers on the page in the designated areas.
 
         <ol type="A">
-            <li></li>
+            <li>Create a line chart of the inflation rate over time. Include a chart title and axis labels.</li>
         </ol>
     </p>
 
-    <div id="dataviz-container"></div>
+    <div id="dataviz-container" style="margin-top:20px;"></div>
 
 
     <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
@@ -122,7 +111,18 @@ F) What is the average, median, min, and max inflation rate (over the past ten y
                 {x: dates, y: rates, mode: "lines+markers"}
             ]
             var chartLayout = {
-                title: {text: "US Inflation Rates (Annual)"}
+                title: {text: "US Inflation Rates (Annual)"},
+                xaxis: {
+                    title: {
+                    text: 'Year'
+                    },
+                    //showgrid: false,
+                    //zeroline: false
+                },
+                yaxis: {
+                    title: {text: 'Inflation Rate (Percent)'},
+                    //showline: false
+                }
             }
             Plotly.newPlot("dataviz-container", chartData, chartLayout, {responsive: true})
 
