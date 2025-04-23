@@ -23,22 +23,25 @@
     <p>
         Write JavaScript code to answer the questions below.
         Log each of the answers to the console.
+        <strong>NOTE:</strong> Format all prices as currency using a dollar sign and rounding to two decimal places.
+        <strong>NOTE:</strong> Format all percentages with a percent sign and rounded to two decimals.
+
 
         <ol type="A">
-            <li>Display the stock symbol (i.e. "NFLX").</li>
+            <li>Choose one of the stock symbols listed above (i.e. "NFLX"), and store it in a variable called <code>symbol</code>.</li>
+            <li>Dynamically compile the corresponding dataset URL using the <code>symbol</code> variable from Question A,
+                and store it in a variable called <code>requestUrl</code>.</li>
+            <li>Fetch stock data for the chosen symbol, using the <code>requestUrl</code> from Question B.</li>
             <li>Display the number of days in the provided data (i.e. 100).
                 <strong>NOTE:</strong> It is sufficient to just count the number of row objects.
             </li>
             <li>Display the date and adjusted closing price on the earliest day (i.e. "2024-02-05" and "$562.06").
-                Format the price as currency using a dollar sign and rounding to two decimal places.
             </li>
             <li>
                 Display the date and adjusted closing price on the latest day (i.e. "2024-06-27" and "$684.34").
-                Format the price as currency using a dollar sign and rounding to two decimal places.
             </li>
             <li>
                 Calculate the overall percent change in adjusted closing price from the earliest to the latest day (i.e. "21.76%").
-                Display the percent change formatted with a percent sign and rounded to two decimals.
             </li>
         </ol>
     </p>
