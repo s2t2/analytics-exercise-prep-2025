@@ -9,8 +9,8 @@
     <h1>AlphaVantage API - Market Status (JSON)</h1>
     <a href="../index.html">Home</a>
 
-    <p>For this exercise, we will use data from the AlphaVantage API.
-        We'll use the <a href="https://www.alphavantage.co/documentation/#market-status">"Market Status" endpoint</a>
+    <p>For this exercise, we will use data from the AlphaVantage API,
+        specifically the <a href="https://www.alphavantage.co/documentation/#market-status">"Market Status" endpoint</a>,
         to fetch information about the current status of major trading venues around the world.
         Consult the API documentation to learn more.
     </p>
@@ -22,7 +22,9 @@
 
         <ol type="A">
             <li>Fetch market status data from the API.</li>
-            <li>Filter the markets to identify only those that have a market type of "Equity", and store them in a variable called <code>equityMarkets</code>. </li>
+            <li>Display the number of markets.</li>
+            <li>Filter the markets to identify only those that have a market type of "Equity", and store them in a variable called <code>equityMarkets</code>.</li>
+            <li>Display the number of equity markets.</li>
             <li>Loop through the equity markets and display the market type and region of each.</li>
             <li>Use a find operation to identify the equity market that has a region of "United States", and store it in a variable called <code>market</code>.</li>
             <li>Display information about the US market, including: the market type, the primary exchanges, the local open and close time, and the current market status. Format the market status using all capital letters.</li>
@@ -43,9 +45,9 @@
 
     <hr>
 
-    <select name="region" id="select-region">
+    <!--select name="region" id="select-region">
         <option value="N/A">Select an Equity Market Region</option>
-    </select>
+    </select-->
 
     <div id="display-market-info">
         <p>Region: <span id="display-region">TODO</span></p>
@@ -93,7 +95,15 @@
 
             console.log("MARKETS:", data.markets.length)
 
-            data.markets.forEach(market => {
+            // FILTER EQUITY MARKETS
+
+            var equityMarkets = data.markets.filter(function(market){
+                return market.market_type == "Equity"
+            })
+
+            console.log("EQUITY MARKETS:", equityMarkets.length)
+
+            equityMarkets.forEach(market => {
                 console.log("...", `${market.region} (${market.market_type})`)
             })
 
@@ -102,7 +112,7 @@
             var region = "United States"
             console.log(region)
 
-            var market = data.markets.find(function(market){
+            var market = equityMarkets.find(function(market){
                 return market.region == region
             })
 

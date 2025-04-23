@@ -1,0 +1,99 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Zen Quotes API - Random Quotes (JSON)</title>
+</head>
+<body>
+
+    <h1>Zen Quotes API - Random Quotes (JSON)</h1>
+    <a href="../index.html">Home</a>
+
+    <p>For this exercise, we will use the <a href="https://docs.zenquotes.io/zenquotes-documentation/">Zen Quotes API</a>
+        to fetch a random quote. This API provides a certain number of requests each day without using an API Key, however for unlimited access they want you to sign up for an API Key.
+        When making requests,
+        Consult the API documentation to learn more.
+    </p>
+
+    <h2>Part 1</h2>
+    <p>
+        Write JavaScript code to answer the questions below.
+        Log each of the answers to the console.
+
+        <ol type="A">
+            <li>Fetch a random quote from the API.</li>
+            <li>Display the quote text.</li>
+            <li>Display the quote author.</li>
+        </ol>
+    </p>
+
+
+    <hr>
+    <h2>Part 2</h2>
+    <p>
+        Write JavaScript code to answer the questions below.
+        Display the answers on the page in the designated areas.
+    </p>
+
+    <ol type="A">
+        <li>Revisit Part 1. Also display the quote text and author in the designated <code>span</code> elements.</li>
+    </ol>
+
+    <hr>
+
+    <div>
+        <p>Quote: <span id="display-quote">TODO</span></p>
+        <p>Author: <span id="display-author">TODO</span></p>
+    </div>
+
+
+
+
+    <script src="https://cdn.jsdelivr.net/npm/d3@7"></script>
+    <script type="text/javascript">
+
+        var displayQuote = document.getElementById("display-quote")
+        var displayAuthor = document.getElementById("display-author")
+
+        var requestUrl = "https://zenquotes.io/api/quotes/[your_key]"
+        //var exampleKey = "abc123"
+        //var requestUrl = `https://zenquotes.io/api/random/${exampleKey}`
+
+        //d3.json(requestUrl).then(function(data) {
+        //    console.log("RESPONSE:", data)
+//
+        //    console.log("---------------------")
+        //    console.log("PART 1...")
+//
+        //    console.log("QUOTE:", data.quoteText)
+        //    console.log("AUTHOR:", data.quoteAuthor)
+//
+        //    console.log("---------------------")
+        //    console.log("PART 2...")
+//
+        //    displayQuote.innerText = data.quoteText
+        //    displayAuthor.innerText = data.quoteAuthor
+//
+        //}).catch(function(error) {
+        //    console.error("ERROR:", error)
+        //})
+
+
+        //d3.json(requestUrl)
+        //    .header("Content-Type", "application/json")
+        //    .mode("no-cors") // needed for this particular API to bypass Cross-origin related issues
+        //    .get(function(error, data) {
+        //        if (error) {
+        //            console.error("ERROR:", error);
+        //        } else {
+        //            console.log("OOPS");
+        //        }
+//
+        //        console.log(data)
+        //    });
+    </script>
+</body>
+</html>
