@@ -9,15 +9,19 @@
     <h1>Stocks (CSV)</h1>
     <a href="../index.html">Home</a>
 
-    <!--h2>Background</h2>
-    <p>There are a handful of CSV files of historical stock data posted on the Internet.
+    <h2>Dataset Information</h2>
+    <p>For this exercise, we will use a handful of CSV files that have been uploaded to the Internet.
+        The CSV files contains historical stock data for a number of companies.
         There is a CSV file for each of the following symbols: AAPL, GOOGL, MSFT, NFLX, NVDA, and SPOT.
-        The name of each CSV file follows a consistent format (i.e. "daily_adjusted_nflx.csv" for NFLX).
-    </p-->
+        The name of each CSV file follows a consistent format (e.g.
+        <a href="https://raw.githubusercontent.com/prof-rossetti/intro-software-dev-python-book/refs/heads/main/docs/data/daily_adjusted_NFLX.csv">"daily_adjusted_NFLX.csv"</a>
+        for NFLX).
+        This data was originally obtained from the AlphaVantage API.
+    </p>
 
     <h2>Part 1</h2>
     <p>
-        Write JavaScript code to process the provided CSV file to answer the questions below.
+        Write JavaScript code to answer the questions below.
         Log each of the answers to the console.
 
         <ol type="A">
@@ -40,10 +44,9 @@
     </p>
 
 
-    <hr>
     <h2>Part 2</h2>
     <p>
-        Write JavaScript code to process the provided CSV file to answer the questions below.
+        Write JavaScript code to answer the questions below.
         Display the answers on the page in the designated areas.
         <strong>NOTE:</strong> when applicable, use the same currency and percent formatting as in Part 1.
 
@@ -56,6 +59,8 @@
         </ol>
     </p>
 
+    <hr>
+    <h2>Display</h2>
     <p>Symbol: <span id="display-symbol">TODO</span></p>
     <p>Earliest: <span id="display-earliest">TODO</span></p>
     <p>Latest: <span id="display-latest">TODO</span></p>
