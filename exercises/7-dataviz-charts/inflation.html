@@ -26,13 +26,15 @@
         Log each of the answers to the console.
 
         <ol type="A">
-            <li>Fetch inflation rates data in JSON format from the API, using the provided URL.</li>
+            <li>Fetch annual inflation rates data in JSON format from the API, using the provided URL.</li>
             <li>Display the name of this dataset (i.e. "Inflation - US Consumer Prices").</li>
             <li>Display the time frequency of this dataset (i.e. "annual").</li>
-            <li>Display the number of datapoints provided. (i.e. 64).</li>
-            <li>Display the time range (earliest and latest date) of available data (i.e. "1960-01-01" to "2023-01-01".</li>
-            <li>Display the average, median, min, and max inflation rate (using all available data).</li>
-            <li>Display the average, median, min, and max inflation rate (over the past ten years only).</li>
+            <li>Display the number of datapoints provided. (i.e. 65).</li>
+            <li>Display the time range (earliest and latest date) of available data (i.e. "1960-01-01" to "2024-01-01".</li>
+            <li>Display the average, min, and max inflation rate (using all available data).</li>
+            <li>Display the average, min, and max inflation rate (over the past ten years only).
+                <strong>NOTE:</strong> it's sufficient to just take the first twelve datapoints using an array slicing approach.
+            </li>
         </ol>
     </p>
 
@@ -90,6 +92,8 @@
             console.log("INTERVAL:", parsedResponse.interval)
 
             var data = parsedResponse.data
+            console.log(data.length)
+
             var earliest = data[ data.length - 1 ]
             var latest = data[0]
             console.log("EARLIEST:", earliest.date)
