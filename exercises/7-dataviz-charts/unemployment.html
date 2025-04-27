@@ -30,7 +30,7 @@
             <li>Display the name of this dataset (i.e. "...").</li>
             <li>Display the time frequency of this dataset (i.e. "annual").</li>
             <li>Display the number of datapoints provided. (i.e. 64).</li>
-            <li>Display the time range (earliest and latest date) of available data (i.e. "1960-01-01" to "2023-01-01".</li>
+            <li>Display the time range (earliest and latest date) of available data (i.e. "1960-01-01" to "2023-01-01").</li>
             <li>Display the average, min, and max inflation rate (using all available data).</li>
             <li>Display the average, min, and max inflation rate (over the past ten years only).
                 <strong>NOTE:</strong> it's sufficient to just take the first twelve datapoints using an array slicing approach.
@@ -77,7 +77,7 @@
             sessionStorage.setItem("ALPHAVANTAGE_API_KEY", apiKey)
         }
 
-        var requestUrl = `https://www.alphavantage.co/query?function=CPI&apikey=${apiKey}`
+        var requestUrl = `https://www.alphavantage.co/query?function=UNEMPLOYMENT&apikey=${apiKey}`
         console.log(requestUrl)
 
         d3.json(requestUrl).then(function(parsedResponse) {
@@ -112,9 +112,9 @@
                 {x: dates, y: rates, mode: "lines+markers"}
             ]
             var chartLayout = {
-                title: {text: "US Consumer Price Index (Monthly)"},
+                title: {text: "US Unemployment Rate (Monthly)"},
                 xaxis: {title: {text: "Month"}},
-                yaxis: {title: {text: "CPI"}},
+                yaxis: {title: {text: "Unemployment Rate (%)"}},
             }
             Plotly.newPlot("dataviz-container", chartData, chartLayout, {responsive: true})
 
