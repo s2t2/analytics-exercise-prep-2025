@@ -21,7 +21,7 @@
         Unlike the other exercises, to fetch this stock data, we specifically need to use a "premium" key,
         which can be obtained from an instructor.
     </p>
-    <p>Also feel free to optionally modify the list of selectable stock symbols in the Stock Selection Form
+    <p>Feel free to optionally modify the list of selectable stock symbols in the Stock Selection Form
         by manually editing the options within the designated <code>select</code> element.
     </p>
 
@@ -41,12 +41,12 @@
                     <li>Display the number of datapoints provided. (i.e. 100).</li>
                     <li>Display the latest available date and the adjusted closing price on that day.</li>
                     <li>Display the earliest available date and the adjusted closing price on that day.</li>
-                    <li>Calculate the rate of return over the entire 100-day time period. To calculate the rate of return, use the earliest and latest adjusted closing prices.</li>
-                    <li>Display the 100-day high and low price. To calculate the 100-day high and low, use the maximum and minimum, respectively, of all adjusted closing prices.</li>
+                    <li>Calculate the rate of return (percent change) over the entire 100-day time period. To calculate the rate of return, use the earliest and latest adjusted closing prices.</li>
+                    <li>Display the 100-day high and low price. To calculate the 100-day high and low, it is sufficient to use the maximum and minimum of all adjusted closing prices.</li>
                 </ul>
             </li>
             <li>Invoke the function once when the page initially loads (no need for an event listener).</li>
-            <li>Add an event listener to also invoke the function whenever an option is selected from the dropdown menu. </li>
+            <li>Add an event listener to also invoke the function whenever an option is selected from the dropdown menu in the Stock Selection Form. </li>
         </ol>
     </p>
 
@@ -55,6 +55,7 @@
     <p>
         Write JavaScript code to answer the questions below.
         Display the answers on the page in the designated areas.
+        Use the same currency and percent sign formatting as in Part 1 (except for the chart).
     </p>
 
     <ol type="A">
@@ -63,8 +64,9 @@
         <ul>
             <li>Display the following information on the page, using the designated <code>span</code> elements:
                 <ul>
-                    <li>Display the latest available date and the adjusted closing price on that day.</li>
-                    <li>Display the earliest available date and the adjusted closing price on that day.</li>
+                    <li>Display the earliest and latest available dates.</li>
+                    <li>Display the adjusted closing price on the earliest day.</li></li>
+                    <li>Display the adjusted closing price on the latest day.</li></li>
                     <li>Display the rate of return over the entire 100-day time period.</li>
                     <li>Display the 100-day high and low price.</li>
                 </ul>
@@ -98,7 +100,7 @@
     <h3>Outputs</h3>
 
     <div>
-        <p>Selected Stock: <span id="display-stock-symbol">TODO</span></p>
+        <!--p>Selected Stock: <span id="display-stock-symbol">TODO</span></p-->
         <!--p>Num Days: <span id="display-day-count">TODO</span></p-->
         <p>Date Range:
             <span id="display-earliest-date">TODO</span> to
@@ -141,7 +143,7 @@
         var stockSelector = document.getElementById("stock-selector")
 
         // display elements:
-        var displaySymbol = document.getElementById("display-stock-symbol")
+        //var displaySymbol = document.getElementById("display-stock-symbol")
         var displayEarliestDate = document.getElementById("display-earliest-date")
         var displayLatestDate = document.getElementById("display-latest-date")
         var displayEarliestClose = document.getElementById("display-earliest-close")
@@ -215,7 +217,7 @@
                 console.log("PART 2...")
 
                 // UPDATING THE PAGE
-                displaySymbol.innerText = symbol
+                //displaySymbol.innerText = symbol
                 //displayDays.innerText = data.length
                 displayEarliestDate.innerText = earliest.timestamp
                 displayLatestDate.innerText = latest.timestamp
