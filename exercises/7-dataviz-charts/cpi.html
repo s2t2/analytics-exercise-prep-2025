@@ -29,7 +29,7 @@
             <li>Display the name of this dataset (i.e. "Consumer Price Index for all Urban Consumers").</li>
             <li>Display the time frequency of this dataset (i.e. "monthly").</li>
             <li>Display the number of datapoints provided. (i.e. 1347).</li>
-            <li>Display the time range (earliest and latest date) of available data (i.e. "1913-01-01" to "2025-03-01".</li>
+            <li>Display the time range (earliest and latest date) of available data (i.e. "1913-01-01" to "2025-03-01").</li>
         </ol>
     </p>
 
@@ -52,16 +52,11 @@
     <script src="https://cdn.plot.ly/plotly-3.0.0.min.js"></script>
     <script type="text/javascript">
 
-        function formatUSD(price) {
-            return `$${price.toFixed(2)}`
-        }
-
-        function formatPct(percentage) {
-            return `${(percentage * 100).toFixed(2)}%`
-        }
 
         // AVOID HARD-CODING THE CREDENTIALS
         // USE SESSION STORAGE TO MINIMIZE THE NUMBER OF TIMES WE HAVE TO PROVIDE THE CREDENTIAL
+        // sessionStorage.clear()
+
         // check session storage for the API Key:
         var apiKey = sessionStorage.getItem("ALPHAVANTAGE_API_KEY")
         if (!apiKey) {

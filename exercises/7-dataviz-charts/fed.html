@@ -56,16 +56,11 @@
     <script src="https://cdn.plot.ly/plotly-3.0.0.min.js"></script>
     <script type="text/javascript">
 
-        function formatUSD(price) {
-            return `$${price.toFixed(2)}`
-        }
-
-        function formatPct(percentage) {
-            return `${(percentage * 100).toFixed(2)}%`
-        }
 
         // AVOID HARD-CODING THE CREDENTIALS
         // USE SESSION STORAGE TO MINIMIZE THE NUMBER OF TIMES WE HAVE TO PROVIDE THE CREDENTIAL
+        // sessionStorage.clear()
+
         // check session storage for the API Key:
         var apiKey = sessionStorage.getItem("ALPHAVANTAGE_API_KEY")
         if (!apiKey) {
@@ -93,15 +88,17 @@
 
             var earliest = data[ data.length - 1 ]
             var latest = data[0]
-            console.log("EARLIEST:", earliest.date)
-            console.log("LATEST:", latest.date)
+            console.log("DATE RANGE:", earliest.date, "to", latest.date)
+
+
+            var rates = data.map(row => parseFloat(row.value))
+            var dates = data.map(row => row.date)
 
             console.log("ALL RATES...")
-            var rates = data.map(row => parseFloat(row.value))
             console.log("MIN:", d3.min(rates))
             console.log("MAX:", d3.max(rates))
             console.log("MEAN:", d3.mean(rates).toFixed(2))
-            console.log("MEDIAN:", d3.median(rates))
+            //console.log("MEDIAN:", d3.median(rates))
 
             console.log("PAST TWELVE MONTHS...")
             var latestRates = rates.slice(0,12)
@@ -109,13 +106,12 @@
             console.log("MIN:", d3.min(latestRates))
             console.log("MAX:", d3.max(latestRates))
             console.log("MEAN:", d3.mean(latestRates).toFixed(2))
-            console.log("MEDIAN:", d3.median(latestRates))
+            //console.log("MEDIAN:", d3.median(latestRates))
+
+
 
             console.log("---------------------")
             console.log("PART 2...")
-
-            var dates = data.map(row => row.date)
-            //var rates = data.map(row => parseFloat(row.value))
 
             // DATAVIZ
             // https://plotly.com/javascript/line-charts/

@@ -130,6 +130,9 @@
 
         // AVOID HARD-CODING THE CREDENTIALS
         // USE SESSION STORAGE TO MINIMIZE THE NUMBER OF TIMES WE HAVE TO PROVIDE THE CREDENTIAL
+
+        // sessionStorage.clear()
+
         // check session storage for the API Key:
         var apiKey = sessionStorage.getItem("ALPHAVANTAGE_API_KEY")
         if (!apiKey) {
