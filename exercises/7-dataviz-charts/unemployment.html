@@ -26,13 +26,11 @@
         Log each of the answers to the console.
 
         <ol type="A">
-            <li>Fetch unemployment rates data in CSV format from the API, using the provided URL.</li>
-            <li>Display the name of this dataset (i.e. "...").</li>
-            <li>Display the time frequency of this dataset (i.e. "annual").</li>
-            <li>Display the number of datapoints provided. (i.e. 64).</li>
-            <li>Display the time range (earliest and latest date) of available data (i.e. "1960-01-01" to "2023-01-01").</li>
-            <li>Display the average, min, and max inflation rate (using all available data).</li>
-            <li>Display the average, min, and max inflation rate (over the past ten years only).
+            <li>Fetch monthly unemployment rates data in CSV format from the API, using the provided URL.</li>
+            <li>Display the number of datapoints provided. (i.e. around 927).</li>
+            <li>Display the time range (earliest and latest date) of available data (i.e. "1948-01-01" to "2025-03-01").</li>
+            <li>Display the average, min, and max unemployment rate (using all available data).</li>
+            <li>Display the average, min, and max unemployment rate (over the past 12 months only).
                 <strong>NOTE:</strong> it's sufficient to just take the first twelve datapoints using an array slicing approach.
             </li>
         </ol>
@@ -58,14 +56,6 @@
     <script src="https://cdn.plot.ly/plotly-3.0.0.min.js"></script>
     <script type="text/javascript">
 
-        function formatUSD(price) {
-            return `$${price.toFixed(2)}`
-        }
-
-        function formatPct(percentage) {
-            return `${(percentage * 100).toFixed(2)}%`
-        }
-
         // AVOID HARD-CODING THE CREDENTIALS
         // USE SESSION STORAGE TO MINIMIZE THE NUMBER OF TIMES WE HAVE TO PROVIDE THE CREDENTIAL
         // check session storage for the API Key:
@@ -77,34 +67,39 @@
             sessionStorage.setItem("ALPHAVANTAGE_API_KEY", apiKey)
         }
 
-        var requestUrl = `https://www.alphavantage.co/query?function=UNEMPLOYMENT&apikey=${apiKey}`
-        console.log(requestUrl)
-
-        d3.json(requestUrl).then(function(parsedResponse) {
-            console.log("RESPONSE:", parsedResponse)
-
+        var requestUrl = `https://www.alphavantage.co/query?function=UNEMPLOYMENT&apikey=${apiKey}&datatype=csv`
+        d3.csv(requestUrl).then(function(data) {
+            console.log("DATA:", data)
+            // observe the rates are strings so we will need to convert them to numbers to do math and chart them
 
             console.log("---------------------")
             console.log("PART 1...")
 
-            console.log("DATASET:", parsedResponse.name)
-            console.log("INTERVAL:", parsedResponse.interval)
-
-            var data = parsedResponse.data
-            console.log(data.length)
+            console.log("MONTHS:", data.length)
 
             var earliest = data[ data.length - 1 ]
             var latest = data[0]
-            console.log("EARLIEST:", earliest.date)
-            console.log("LATEST:", latest.date)
+            console.log("DATE RANGE:", earliest.timestamp, "to", latest.timestamp)
+
+            var dates = data.map(row => row.timestamp)
+            var rates = data.map(row => parseFloat(row.value))
+
+            console.log("ALL TIME...")
+            console.log("MIN:", d3.min(rates))
+            console.log("MAX:", d3.max(rates))
+            console.log("MEAN:", d3.mean(rates))
+
+            var latestRates = rates.slice(0, 12)
+            console.log("LAST 12 MONTHS...")
+            console.log("MIN:", d3.min(latestRates))
+            console.log("MAX:", d3.max(latestRates))
+            console.log("MEAN:", d3.mean(latestRates))
 
 
 
             console.log("---------------------")
             console.log("PART 2...")
 
-            var dates = data.map(row => row.date)
-            var rates = data.map(row => parseFloat(row.value))
 
             // DATAVIZ
             // https://plotly.com/javascript/line-charts/
@@ -117,6 +112,7 @@
                 yaxis: {title: {text: "Unemployment Rate (%)"}},
             }
             Plotly.newPlot("dataviz-container", chartData, chartLayout, {responsive: true})
+
 
 
         }).catch(function(error) {
