@@ -8,48 +8,54 @@
     <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
   </head>
   <body>
-    <h1><a href="index.html">JavaScript DOM Fundamentals</a></h1>
+    <h1>Map of All Train Stations</h1>
+    <a href="../index.html">Home</a>
 
-    <nav>
-      <ul>
-        <li><a href="page-loading.html">Page-loading Considerations</a></li>
-        <li><a href="selections.html">Selections</a></li>
-        <li><a href="event-listening.html">Event-listening</a></li>
-        <li><a href="dom-manipulation.html">DOM Manipulation</a></li>
-        <li><a href="data-driven-docs.html">Data-driven Documents</a></li>
-        <li><a href="changing-datasets.html">Changing Datasets</a></li>
-        <li><a href="interactive-charts.html">Interactive Charts and Graphs</a></li>
-        <li><a href="interactive-maps.html">Interactive Maps</a></li>
-      </ul>
-    </nav>
+    <<h2>Dataset Information</h2>
+    <p>For this exercise, we will use data about train stations from the
+      <a href="https://new.mta.info/stations/metro-north-railroad-stations">Metro North</a> and
+      <a href="https://shorelineeast.com/stations/">Shore Line East</a>
+      rail systems in New York and Connecticut.
+    </p>
 
-    <h2>Interactive Maps</h2>
+    <h2>Background</h2>
+    <p class="lead">This exercise leverages the <a href="http://leafletjs.com/">Leaflet</a> library to create interactive maps.</p>
 
-    <div id="instructions">
-      <h3>Objectives</h3>
-      <p class="lead">This exercise leverages the <a href="http://leafletjs.com/">Leaflet</a> library to create interactive maps.</p>
-      <ol>
-        <li>Preview this page in a browser. Ensure you see a map with a marker.</li>
-        <li>The default marker has been hard-coded to depict the location of New Haven Union Station. Your challenge is to instead dynamically display a marker for each station included in the <code>trainStations</code> variable.
-            Display all the markers on the same map. Hint: try using a <code>forEach()</code> function!
-        </li>
-        <li>Optionally: display only a single station on the map; configure a select element to include an option for each station; and when a station is selected, trigger a map update to display only a marker for the selected station.</li>
-      </ol>
-    </div>
+    <h2>Part 1</h2>
+    <p>
+        Write JavaScript code to process the provided <code>trainStations</code> variable to answer the questions below.
+        Log each of the answers to the console.
 
-    <hr id="divider">
+        <ol type="A">
+            <li>Display the number of stations (i.e. 17).</li>
+            <li>Loop through the train stations and display the name and abbreviation of each.</li>
+            <!--li>Programmatically determine which rail system each station belongs to, based on that station's website domain.
+                Stations in Metro North have a domain of "mta.info" while stations in the Shore Line East system have a domain of "shorelineeast.com".
+                <strong>HINT:</strong> use string inclusion in conjunction with a filter operation or two.
+            </li-->
+        </ol>
+    </p>
 
-    <select name="stationSelector" id="station-selector"></select>
-
-    <div id="my-map-container" style="width:75%; height:400px; margin:25px;"></div>
 
     <hr>
-    <footer>
-      <p>
-        <a href="https://prof-rossetti.github.io/js-dom-fundamentals/">view</a> |
-        <a href="https://github.com/prof-rossetti/js-dom-fundamentals">source</a>
-      </p>
-    </footer>
+    <h2>Part 2</h2>
+    <p>
+        Write JavaScript code to process the provided <code>trainStations</code> variable to answer the questions below.
+        Display the answers on the page in the designated places.
+
+        <ol type="A">
+            <li>Loop through the stations and display a marker for each station on the map.
+              The marker text should include the name of the station.
+              Optionally also include a hyperlink to the webpage providing more information about that station.
+            </li>
+        </ol>
+    </p>
+
+
+    <hr>
+    <h2>Map (All Stations)</h2>
+
+    <div id="my-map-container" style="width:75%; height:400px; margin:25px;"></div>
 
     <script type="text/javascript">
 
@@ -76,7 +82,6 @@
         {abbrev: "WES", name: "Westbrook", lat: 41.28876307212696, lon: -72.44840204715729, url: "https://shorelineeast.com/stations/westbrook-station/"},
         {abbrev: "OSB", name: "Old Saybrook", lat: 41.30039086249561, lon: -72.37682461738586, url: "https://shorelineeast.com/stations/old-saybrook-station/"},
         {abbrev: "NLC", name: "New London", lat: 41.354158032583534, lon: -72.0930764079094, url: "https://shorelineeast.com/stations/new-london-station/"},
-
       ]
 
       //
