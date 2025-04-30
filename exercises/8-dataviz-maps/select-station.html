@@ -2,54 +2,66 @@
 <html>
   <head>
     <meta charset="utf-8">
-    <title>Interactive Maps | JavaScript DOM Fundamentals</title>
+    <title>All Stations Map</title>
 
     <link rel="stylesheet" href="https://unpkg.com/leaflet@1.0.3/dist/leaflet.css" />
     <script src="https://unpkg.com/leaflet@1.0.3/dist/leaflet.js"></script>
   </head>
   <body>
-    <h1><a href="index.html">JavaScript DOM Fundamentals</a></h1>
+    <h1>All Stations Map</h1>
+    <a href="../index.html">Home</a>
 
-    <nav>
-      <ul>
-        <li><a href="page-loading.html">Page-loading Considerations</a></li>
-        <li><a href="selections.html">Selections</a></li>
-        <li><a href="event-listening.html">Event-listening</a></li>
-        <li><a href="dom-manipulation.html">DOM Manipulation</a></li>
-        <li><a href="data-driven-docs.html">Data-driven Documents</a></li>
-        <li><a href="changing-datasets.html">Changing Datasets</a></li>
-        <li><a href="interactive-charts.html">Interactive Charts and Graphs</a></li>
-        <li><a href="interactive-maps.html">Interactive Maps</a></li>
-      </ul>
-    </nav>
+    <h2>Dataset Information</h2>
+    <p>For this exercise, we will use data about train stations from the
+      <a href="https://new.mta.info/stations/metro-north-railroad-stations">Metro North</a> and
+      <a href="https://shorelineeast.com/stations/">Shore Line East</a>
+      rail systems in New York and Connecticut.
+    </p>
 
-    <h2>Interactive Maps</h2>
+    <!--h2>Part 1</h2>
+    <p>
+        Write JavaScript code to process the provided <code>trainStations</code> variable to answer the questions below.
+        Log each of the answers to the console.
 
-    <div id="instructions">
-      <h3>Objectives</h3>
-      <p class="lead">This exercise leverages the <a href="http://leafletjs.com/">Leaflet</a> library to create interactive maps.</p>
-      <ol>
-        <li>Preview this page in a browser. Ensure you see a map with a marker.</li>
-        <li>The default marker has been hard-coded to depict the location of New Haven Union Station. Your challenge is to instead dynamically display a marker for each station included in the <code>trainStations</code> variable.
-            Display all the markers on the same map. Hint: try using a <code>forEach()</code> function!
-        </li>
-        <li>Optionally: display only a single station on the map; configure a select element to include an option for each station; and when a station is selected, trigger a map update to display only a marker for the selected station.</li>
-      </ol>
-    </div>
+        <ol type="A">
+            <li>...</li>
+        </ol>
+    </p>
 
-    <hr id="divider">
+
+    <hr>
+    <h2>Part 2</h2-->
+    <p>
+        Write JavaScript code to process the provided <code>trainStations</code> variable to answer the questions below.
+        Display the answers on the page in the designated places.
+
+        <ol type="A">
+            <li>See the provided a station selector dropdown menu (i.e the designated <code>select</code> element).
+              Loop through the stations and dynamically create a new option element for each station.
+              Use the station's abbreviation as the option value, and the stations's name as the option text.
+            </li>
+            <li>Create a function called <code>updateMap</code>.
+                It should identify what station is currently selected from the dropdown menu,
+                then lookup the corresponding station using a find operation,
+                and finally display a corresponding marker on the map.
+                The marker text should include the name of the station,
+                as well as a hyperlink to the webpage providing more information about that station.
+            </li>
+            <li>Invoke the function when the page loads. This should display the default / first station (i.e. "Grand Central Station").</li>
+            <li>Add an event listener to update the map when a new station is selected.
+                As a result, you should be able to select different stations from the dropdown to see the corresponding info on the map.
+            </li>
+        </ol>
+    </p>
+
+
+    <hr>
+    <h2>Map</h2>
 
     <select name="stationSelector" id="station-selector"></select>
 
     <div id="my-map-container" style="width:75%; height:400px; margin:25px;"></div>
 
-    <hr>
-    <footer>
-      <p>
-        <a href="https://prof-rossetti.github.io/js-dom-fundamentals/">view</a> |
-        <a href="https://github.com/prof-rossetti/js-dom-fundamentals">source</a>
-      </p>
-    </footer>
 
     <script type="text/javascript">
 
@@ -88,7 +100,7 @@
         var zoomLevel = 8
 
         var map = L.map(mapContainerId)
-            .setView(latLonCoords, zoomLevel);
+            .setView(latLonCoords, zoomLevel)
 
         //
         // ADD MAP TILES
@@ -98,71 +110,68 @@
         var tileLayerOptions = {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}
 
         L.tileLayer(tileUrlTemplate, tileLayerOptions)
-            .addTo(map);
+            .addTo(map)
 
         //
-        // ADD MARKER(S) TO MAP
-        //
-
-        //var stationPopup = "<b>New Haven Union Station</b>" + "<br>" + "Some content or context here."
-        //
-        //L.marker([41.29771887088102, -72.92673110961914])
-        //    .addTo(map)
-        //    .bindPopup(stationPopup)
-
         // ADD MARKER LAYER TO MAP:
-
-        var markersLayer = L.layerGroup().addTo(map);
-
-        //var stationPopup = "<b>New Haven Union Station</b><br>Some content or context here.";
         //
-        //L.marker([41.29771887088102, -72.92673110961914])
-        //    .bindPopup(stationPopup)
-        //    .addTo(markersLayer); // <-- Add to markersLayer instead of map directly
-        //
-        //// CLEAR ALL MARKERS:
-        //
-        //markersLayer.clearLayers();
+        var markersLayer = L.layerGroup().addTo(map)
+        // we use the marker layer because it makes it easier to clear the markers later
+        //markersLayer.clearLayers()
 
-
-        // TASK A: add a dropdown option for each station
+        //
+        // TASK A: POPULATE DROP-DOWN MENU
+        //
 
         var stationSelector = document.getElementById("station-selector")
 
         trainStations.forEach(function(station){
+            // compile the <option> element:
+            // <option value="GCT">Grand Central Terminal</option>
+            var option = document.createElement("option")
+            option.value = station.abbrev
+            option.text = station.name
 
-                // compile the <option> element: <option value="GCT">Grand Central Terminal</option>
-                var option = document.createElement("option")
-                option.value = station.abbrev
-                option.text = station.name
-
-                // Append the new option to the select element
-                stationSelector.appendChild(option)
-
+            // Append the new option to the select element
+            stationSelector.appendChild(option)
         })
 
 
-        // ... and when that station gets selected, display it on the map
+        //
+        // TASK B: DISPLAY THE SELECTED STATION ON THE MAP
+        //
 
-        function resetMarker(event) {
-            var selectedValue = event.target.value;
-            console.log("SELECTION", selectedValue)
+        function updateMap() {
+        //function resetMarker(event) {
+            //var stationAbbrev = event.target.value
+            var stationAbbrev = stationSelector.value
+            console.log("SELECTION", stationAbbrev)
 
-            var selectedStation = trainStations.find(function(station){
-                return station.abbrev == selectedValue
+            // find the matching station:
+            var station = trainStations.find(function(station){
+                return station.abbrev == stationAbbrev
             })
-            console.log("STATION:", selectedStation)
+            console.log("STATION:", station)
 
             markersLayer.clearLayers() // clear markers layer
 
-            var stationPopup = selectedStation.name //`<b>${selectedStation.name}</b>`
+            var stationPopup = `<b>${station.name}</b>`
+            stationPopup += "<br>"
+            stationPopup += "Some more content or context here."
+            stationPopup += "<br>"
+            stationPopup += `<a href='${station.url}'>See website for more information.</a>`
 
-            L.marker([selectedStation.lat, selectedStation.lon])
+            L.marker([station.lat, station.lon])
                 .bindPopup(stationPopup)
-                .addTo(markersLayer) // <-- Add to markersLayer instead of map directly
+                .addTo(markersLayer) // add to markersLayer instead of map directly
 
         }
-        stationSelector.addEventListener("change", resetMarker, false)
+
+        // UPDATE MAP WHEN THE PAGE LOADS:
+        updateMap()
+
+        // EVENT LISTENER:
+        stationSelector.addEventListener("change", updateMap, false)
 
     </script>
   </body>
